@@ -1,12 +1,15 @@
-* Any known limitations, constrains or stuff not working, such as (but not limited to):
-    * requiring a full dedicated domain ?
-    * architectures not supported ?
-    * not-working single-sign on or LDAP integration ?
-    * the app requires an important amount of RAM / disk / .. to install or to work properly
-    * etc...
+# FAQ
+## Compared to Disqus
+Cusdis is not designed to be a complete alternative to Disqus. It's aim is to implement a minimalist and embeddable comment system for small websites (such as your static blog).
 
-* Other infos that people should be aware of, such as:
-    * any specific step to perform after installing (such as manually finishing the install, specific admin credentials, ...)
-    * how to configure / administrate the application if it ain't obvious
-    * upgrade process / specificities / things to be aware of ?
-    * security considerations ?
+## Given below are the pros and cons of Cusdis:
+
+### Pros
+   - Cusdis is open-source and self-hostable. Hence, you own your data.
+   - The SDK is lightweight(~5kb gzipped).
+   - Cusdis doesn't require your user to sign in to make a comment.
+   - Cusdis doesn't use cookies at all.
+### Cons
+   - Cusdis is on the early stages of its development.
+   - There is no spam filter, hence, you will have to manually moderate your comment section and comments won't be displayed until you approve them.
+   - Disqus is a company, we aren't.
