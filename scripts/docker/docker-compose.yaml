@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  cusdis:
+    image: "djyde/cusdis"
+    ports:
+      - "3000:3000"
+    environment:
+      - USERNAME=__admin__
+      - PASSWORD=__password__
+      - JWT_SECRET=ofcourseistillloveyou
+      - NEXTAUTH_URL=__final_path__
+      - DB_TYPE=pgsql
+      - DB_URL=postgresql://cusdis:__dbpass__@pgsql:5432/cusdis
+  pgsql:
+    image: "postgres:13"
+    volumes:
+      - "./data:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_USER=cusdis
+      - POSTGRES_DB=cusdis
+      - POSTGRES_PASSWORD=__dbpass__
