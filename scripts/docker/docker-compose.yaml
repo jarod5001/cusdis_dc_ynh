@@ -3,7 +3,7 @@ services:
   cusdis:
     image: "djyde/cusdis"
     ports:
-      - "3000:3000"
+      - "__port__:__port__"
     environment:
       - USERNAME=__admin__
       - PASSWORD=__password__
