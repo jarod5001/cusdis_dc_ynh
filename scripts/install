@@ -261,7 +261,7 @@ ynh_replace_string --match_string="__port__" --replace_string="$port" --target_f
 ynh_replace_string --match_string="__admin__" --replace_string="$admin" --target_file="$final_path/docker-compose.yaml"
 ynh_replace_string --match_string="__password__" --replace_string="$password" --target_file="$final_path/docker-compose.yaml"
 ynh_replace_string --match_string="__final_path__" --replace_string="$final_path" --target_file="$final_path/docker-compose.yaml"
-ynh_replace_string --match_string="__dbpass__" --replace_string="$dbpass" --target_file="$final_path/docker-compose.yaml"
+ynh_replace_string --match_string="__db_pass__" --replace_string="$db_pass" --target_file="$final_path/docker-compose.yaml"
 
 
 cd $final_path
