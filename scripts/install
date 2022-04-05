@@ -257,6 +257,13 @@ ynh_add_config --template="docker/docker-compose.yaml" --destination="$final_pat
 chmod 400 "$final_path/docker-compose.yaml"
 chown $app:$app "$final_path/docker-compose.yaml"
 
+ynh_replace_string --match_string="__port__" --replace_string="$port" --target_file="$final_path/docker-compose.yaml"
+ynh_replace_string --match_string="__admin__" --replace_string="$admin" --target_file="$final_path/docker-compose.yaml"
+ynh_replace_string --match_string="__password__" --replace_string="$password" --target_file="$final_path/docker-compose.yaml"
+ynh_replace_string --match_string="__final_path__" --replace_string="$final_path" --target_file="$final_path/docker-compose.yaml"
+ynh_replace_string --match_string="__dbpass__" --replace_string="$dbpass" --target_file="$final_path/docker-compose.yaml"
+
+
 cd $final_path
 docker-compose up -d
 
@@ -303,8 +310,8 @@ ynh_script_progression --message="Configuring SSOwat..." --time --weight=1
 ynh_permission_update --permission="main" --add="visitors"
 
 # Installation with curl
-ynh_script_progression --message="Finalizing installation..." --time --weight=1
-ynh_local_curl "/INSTALL_PATH" "key1=value1" "key2=value2" "key3=value3"
+# ynh_script_progression --message="Finalizing installation..." --time --weight=1
+# ynh_local_curl "/INSTALL_PATH" "key1=value1" "key2=value2" "key3=value3"
 
 # Remove the public access
 ynh_permission_update --permission="main" --remove="visitors"
@@ -330,7 +337,7 @@ ynh_use_logrotate
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
 #=================================================
-ynh_script_progression --message="Integrating service in YunoHost..." --time --weight=1
+# ynh_script_progression --message="Integrating service in YunoHost..." --time --weight=1
 
 ### `yunohost service add` integrates a service in YunoHost. It then gets
 ### displayed in the admin interface and through the others `yunohost service` commands.
@@ -341,7 +348,7 @@ ynh_script_progression --message="Integrating service in YunoHost..." --time --w
 ###		- As well as the section "INTEGRATE SERVICE IN YUNOHOST" in the restore script
 ###		- And the section "INTEGRATE SERVICE IN YUNOHOST" in the upgrade script
 
-yunohost service add $app --description="A short description of the app" --log="/var/log/$app/$app.log"
+# yunohost service add $app --description="A short description of the app" --log="/var/log/$app/$app.log"
 
 ### Additional options starting with 3.8:
 ###
@@ -362,7 +369,7 @@ yunohost service add $app --description="A short description of the app" --log="
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..." --time --weight=1
+# ynh_script_progression --message="Starting a systemd service..." --time --weight=1
 
 ### `ynh_systemd_action` is used to start a systemd service for an app.
 ### Only needed if you have configure a systemd service
@@ -373,15 +380,15 @@ ynh_script_progression --message="Starting a systemd service..." --time --weight
 ###		- And the section "STOP SYSTEMD SERVICE" and "START SYSTEMD SERVICE" in the change_url script
 
 # Start a systemd service
-ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
+# ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
 
 #=================================================
 # SETUP FAIL2BAN
 #=================================================
-ynh_script_progression --message="Configuring Fail2Ban..." --time --weight=1
+# ynh_script_progression --message="Configuring Fail2Ban..." --time --weight=1
 
 # Create a dedicated Fail2Ban config
-ynh_add_fail2ban_config --logpath="/var/log/nginx/${domain}-error.log" --failregex="Regex to match into the log for a failed login"
+# ynh_add_fail2ban_config --logpath="/var/log/nginx/${domain}-error.log" --failregex="Regex to match into the log for a failed login"
 
 #=================================================
 # SETUP SSOWAT
@@ -400,12 +407,12 @@ fi
 ### does have for example an admin interface or an API.
 
 # Only the admin can access the admin panel of the app (if the app has an admin panel)
-ynh_permission_create --permission="admin" --url="/admin" --allowed=$admin
+# ynh_permission_create --permission="admin" --url="/admin" --allowed=$admin
 
 # Everyone can access the API part
 # We don't want to display the tile in the SSO so we put --show_tile="false"
 # And we don't want the YunoHost admin to be able to remove visitors group to this permission, so we put --protected="true"
-ynh_permission_create --permission="api" --url="/api" --allowed="visitors" --show_tile="false" --protected="true"
+# ynh_permission_create --permission="api" --url="/api" --allowed="visitors" --show_tile="false" --protected="true"
 
 #=================================================
 # RELOAD NGINX
