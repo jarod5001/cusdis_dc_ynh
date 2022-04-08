@@ -260,7 +260,7 @@ chown $app:$app "$final_path/docker-compose.yaml"
 ynh_replace_string --match_string="__port__" --replace_string="$port" --target_file="$final_path/docker-compose.yaml"
 ynh_replace_string --match_string="__admin__" --replace_string="$admin" --target_file="$final_path/docker-compose.yaml"
 ynh_replace_string --match_string="__password__" --replace_string="$password" --target_file="$final_path/docker-compose.yaml"
-ynh_replace_string --match_string="__final_path__" --replace_string="$domain/$path_url" --target_file="$final_path/docker-compose.yaml"
+ynh_replace_string --match_string="__final_path__" --replace_string="https://$domain/$path_url" --target_file="$final_path/docker-compose.yaml"
 ynh_replace_string --match_string="__dbpass__" --replace_string="$dbpass" --target_file="$final_path/docker-compose.yaml"
 
 
